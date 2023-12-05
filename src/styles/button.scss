@@ -1,0 +1,19 @@
+.btnCard {
+    display: inline-flex;
+    height: 3.75rem;
+    padding: 0rem 1.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #BDBDBD;
+
+    &.green {
+        background: #27AE60;
+    }
+}
+
+.btnCard:hover {
+    height: 2.5rem;
+}
