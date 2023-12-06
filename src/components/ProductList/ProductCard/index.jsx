@@ -1,4 +1,7 @@
+import axios from "axios";
+
 export const ProductCard = ({ product }) => {
+    
     return(
         <li>
             <img src={product.img} alt={product.name} />

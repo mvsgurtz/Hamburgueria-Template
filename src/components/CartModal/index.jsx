@@ -7,7 +7,7 @@ export const CartModal = ({ cartList }) => {
    }, 0);
 
    return (
-      <div role="dialog">
+      <div role="dialog" >
          <div>
             <h2>Carrinho de compras</h2>
             <button aria-label="close" title="Fechar">

@@ -1,6 +1,7 @@
 import { ProductCard } from "./ProductCard";
 
 export const ProductList = ({ productList }) => {
+
    return (
       <ul>
          {productList.map((product) => (
