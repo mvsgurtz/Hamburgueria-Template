@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartModal } from "../../components/CartModal";
 import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
@@ -7,14 +7,40 @@ import axios from "axios";
 export const HomePage = () => {
    const [productList, setProductList] = useState([]);
    const [cartList, setCartList] = useState([]);
+   const [isVisible, setIsVisible] = useState(false);
 
-   const hamburguerList = async () =>{
-      const serverURL = "https://hamburgueria-kenzie-json-serve.herokuapp.com";  
-      const api = axios.create ({baseURL: serverURL, timeout: 5 * 1000});
-      const getApi = await api.get("/products");
-      setProductList(getApi.data);
-}
-   hamburguerList();
+   useEffect(() => {
+      const hamburguerList = async () => {
+         const serverURL = "https://hamburgueria-kenzie-json-serve.herokuapp.com";
+         const api = axios.create({ baseURL: serverURL, timeout: 5 * 1000 });
+         const getApi = await api.get("/products");
+         setProductList(getApi.data);
+      }
+      hamburguerList();
+   }, [])
+
+   const addProductCart = (product) => {
+      const hasProduct = cartList.some((cartItem) => cartItem.id === product.id);
+      console.log(cartList);
+      if (!hasProduct) {
+         setCartList([...cartList, product])
+      }
+      else {
+         console.log("O produto já foi adicionado!");
+      }
+   }
+
+   const removeProductCart = (productID) => {
+      const removeItem = cartList.filter((cartProduct) => cartProduct.id !== productID)
+      setCartList(removeItem);
+   }
+
+   const removeAllProducts = () =>{
+      setCartList([]);
+   }
+   
+
+
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
@@ -24,10 +50,19 @@ export const HomePage = () => {
 
    return (
       <div>
-         <Header />
+         <Header setIsVisible={setIsVisible} />
          <main className="main__container">
-            <ProductList productList={productList} />
-            <CartModal cartList={cartList} />
+            <ProductList productList={productList}
+               addProductCart={addProductCart} />
+            {isVisible ? (
+               <CartModal
+                  setIsVisible={setIsVisible}
+                  cartList={cartList}
+                  removeProductCart={removeProductCart}
+                  removeAllProducts = {removeAllProducts}/>
+
+            ) : null}
+
          </main>
       </div>
    );

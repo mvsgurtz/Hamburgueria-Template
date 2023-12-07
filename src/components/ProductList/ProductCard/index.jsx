@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ product, addProductCart}) => {
     
     return(
         <li>
@@ -9,7 +9,7 @@ export const ProductCard = ({ product }) => {
                 <h3>{product.name}</h3>
                 <span>{product.category}</span>
                 <span>{product.price.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</span>
-                <button>Adicionar</button>
+                <button onClick={() => {addProductCart(product)}}>Adicionar</button>
             </div>
         </li>
     )
