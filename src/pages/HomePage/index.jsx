@@ -6,7 +6,10 @@ import axios from "axios";
 
 export const HomePage = () => {
    const [productList, setProductList] = useState([]);
-   const [cartList, setCartList] = useState([]);
+   const [cartList, setCartList] = useState(() => {
+      const localInfo = localStorage.getItem("@CartItems");
+      return localInfo ? JSON.parse(localInfo) : [];
+   });
    const [isVisible, setIsVisible] = useState(false);
 
    useEffect(() => {
@@ -19,9 +22,14 @@ export const HomePage = () => {
       hamburguerList();
    }, [])
 
+   useEffect(() => {
+      localStorage.setItem("@CartItems", JSON.stringify(cartList))
+   }, [cartList])
+
    const addProductCart = (product) => {
+
       const hasProduct = cartList.some((cartItem) => cartItem.id === product.id);
-      console.log(cartList);
+      
       if (!hasProduct) {
          setCartList([...cartList, product])
       }
@@ -35,11 +43,9 @@ export const HomePage = () => {
       setCartList(removeItem);
    }
 
-   const removeAllProducts = () =>{
+   const removeAllProducts = () => {
       setCartList([]);
    }
-   
-
 
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
@@ -59,7 +65,7 @@ export const HomePage = () => {
                   setIsVisible={setIsVisible}
                   cartList={cartList}
                   removeProductCart={removeProductCart}
-                  removeAllProducts = {removeAllProducts}/>
+                  removeAllProducts={removeAllProducts} />
 
             ) : null}
 
