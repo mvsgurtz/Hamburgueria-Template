@@ -3,6 +3,7 @@ import { CartModal } from "../../components/CartModal";
 import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
 import axios from "axios";
+import style from "./style.module.scss";
 
 export const HomePage = () => {
    const [productList, setProductList] = useState([]);
@@ -57,7 +58,7 @@ export const HomePage = () => {
    return (
       <div>
          <Header setIsVisible={setIsVisible} />
-         <main className="main__container">
+         <main className={style.main__container}>
             <ProductList productList={productList}
                addProductCart={addProductCart} />
             {isVisible ? (
