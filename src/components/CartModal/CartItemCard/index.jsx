@@ -6,7 +6,7 @@ export const CartItemCard = ({ product, removeProductCart }) => {
     <li className={style.li__item}>
       <div className={style.item__info}>
         <img src={product.img} alt={product.name} />
-        <div>
+        <div className={style.item__value}>
           <h3>{product.name}</h3>
           <span>
             {product.price.toLocaleString("pt-BR", {

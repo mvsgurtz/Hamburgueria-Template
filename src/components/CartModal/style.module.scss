@@ -1,100 +1,111 @@
 .modal__container {
-    position: fixed;
-    inset: 0;
+  position: fixed;
+  inset: 0;
 
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family);
+
+  .modal__cart {
+    min-height: 24rem;
+    height: auto;
+    width: 30rem;
+    border-radius: 0.5rem;
+    background: #fff;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-family);
+    flex-direction: column;
+    justify-content: space-between;
 
-    .modal__cart {
-        min-height: 24rem;
-        height: auto;
-        width: 30rem;
-        border-radius: 0.5rem;
-        background: #FFF;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    .cart__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: var(--color-primary);
+      border-radius: 0.5rem 0.5rem 0rem 0rem;
 
-        .cart__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: var(--color-primary);
-            border-radius: 0.5rem 0.5rem 0rem 0rem;
+      h2 {
+        color: white;
+        font: var(--heading3);
+        font-family: var(--font-family);
+        font-weight: 700;
+      }
 
-            h2 {
-                color: white;
-                font: var(--heading3);
-                font-family: var(--font-family);
-                font-weight: 700;
-            }
-
-            button {
-                border: none;
-                color: white;
-                background-color: var(--color-primary);
-            }
-        }
-
-
-        .cart__footer {
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-
-            .cart__value {
-                padding-block: 10px;
-                display: flex;
-                justify-content: space-between;
-                position: relative;
-
-                hr {
-                    width: 28rem;
-                    height: .125rem;
-                    position: absolute;
-                    background-color: var(--grey-100);
-                    border: none;
-                    top: -10px;
-
-                }
-
-                span {
-                    color: var(--grey-600);
-                    font: var(--body);
-                    font-weight: 600;
-                }
-
-                .value__span {
-                    color: var(--grey-300);
-                    font: var(--body);
-                    font-weight: 600;
-                }
-            }
-
-            button {
-                border: none;
-                display: flex;
-                width: 28.375rem;
-                height: 3rem;
-                padding: 0rem 1.25rem;
-                justify-content: center;
-                align-items: center;
-                border-radius: 0.5rem;
-                background: #BDBDBD;
-                font-family: var(--font-family);
-                color: white;
-                font-size: 1rem;
-                font-weight: 600;
-            }
-        }
-
-
+      button {
+        border: none;
+        color: white;
+        background-color: var(--color-primary);
+      }
     }
+
+    .cart__footer {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+
+      .cart__value {
+        padding-block: 10px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        hr {
+          width: 28rem;
+          height: 0.125rem;
+          position: absolute;
+          background-color: var(--grey-100);
+          border: none;
+          top: -10px;
+        }
+
+        span {
+          color: var(--grey-600);
+          font: var(--body);
+          font-weight: 600;
+        }
+
+        .value__span {
+          color: var(--grey-300);
+          font: var(--body);
+          font-weight: 600;
+        }
+      }
+
+      button {
+        border: none;
+        display: flex;
+        width: 28.375rem;
+        height: 3rem;
+        padding: 0rem 1.25rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        background: #bdbdbd;
+        font-family: var(--font-family);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .modal__cart {
+    max-width: 24rem;
+    min-height: 22em;
+  }
+
+  .cart__footer button{
+    max-width: 100%;
+  }
+
+  .cart__footer hr{
+    max-width: 100%;
+  }
 
 }

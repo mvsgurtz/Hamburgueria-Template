@@ -58,8 +58,6 @@ export const HomePage = () => {
       setCartList([]);
    }
 
-
-
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
