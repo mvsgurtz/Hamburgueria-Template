@@ -16,7 +16,7 @@ export const ProductCard = ({ product, addProductCart}) => {
                 <span>{product.category}</span>
                 <span
                 className= {styles.info__price}>{product.price.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</span>
-                <button className="btnCard" onClick={() => {addProductCart(product)}}>Adicionar</button>
+                <button className="btnCard" onClick={() => {addProductCart(product)} }>Adicionar</button>
             </div>
         </li>
     )

@@ -12,6 +12,7 @@ export const HomePage = () => {
       return localInfo ? JSON.parse(localInfo) : [];
    });
    const [isVisible, setIsVisible] = useState(false);
+   const [count, setCount] = useState(2);
 
    useEffect(() => {
       const hamburguerList = async () => {
@@ -25,14 +26,23 @@ export const HomePage = () => {
 
    useEffect(() => {
       localStorage.setItem("@CartItems", JSON.stringify(cartList))
+      addCount();
+
    }, [cartList])
+
+   const addCount = () => {
+      if(cartList){
+         setCount(cartList.length)
+      }
+   }
 
    const addProductCart = (product) => {
 
       const hasProduct = cartList.some((cartItem) => cartItem.id === product.id);
-      
+
       if (!hasProduct) {
          setCartList([...cartList, product])
+         addCount();
       }
       else {
          console.log("O produto já foi adicionado!");
@@ -48,6 +58,8 @@ export const HomePage = () => {
       setCartList([]);
    }
 
+
+
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
@@ -57,17 +69,16 @@ export const HomePage = () => {
 
    return (
       <div>
-         <Header setIsVisible={setIsVisible} />
+            <Header setIsVisible={setIsVisible} count={count}/>
          <main className={style.main__container}>
             <ProductList productList={productList}
-               addProductCart={addProductCart} />
+               addProductCart={addProductCart} addCount = {addCount} />
             {isVisible ? (
                <CartModal
                   setIsVisible={setIsVisible}
                   cartList={cartList}
                   removeProductCart={removeProductCart}
                   removeAllProducts={removeAllProducts} />
-
             ) : null}
 
          </main>

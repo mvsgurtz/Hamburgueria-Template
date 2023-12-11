@@ -3,9 +3,10 @@ import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
 import style from "./style.module.scss";
 
-export const Header = ({setIsVisible}) => {
+export const Header = ({setIsVisible, count}) => {
    const [value, setValue] = useState("");
 
+   console.log(count);
 
    return (
       <header className={style.header__container}>
@@ -14,7 +15,7 @@ export const Header = ({setIsVisible}) => {
             <div className={style.shop__container}>
                <button onClick={() => {setIsVisible(true)}} className={style.cart__button}>
                   <MdShoppingCart className={style.cart__icon} size={21} />
-                  <span>0</span>
+                  <span>{count}</span>
                </button>
                <form>
                   <input
