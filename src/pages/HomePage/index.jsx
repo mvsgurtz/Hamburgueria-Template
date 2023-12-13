@@ -4,6 +4,7 @@ import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
 import axios from "axios";
 import style from "./style.module.scss";
+import { toast } from "react-toastify";
 
 export const HomePage = () => {
    const [productList, setProductList] = useState([]);
@@ -44,7 +45,7 @@ export const HomePage = () => {
          addCount();
       }
       else {
-         console.log("O produto já foi adicionado!");
+         toast.error("O produto já foi adicionado!");
       }
    }
 
@@ -66,13 +67,6 @@ export const HomePage = () => {
          setProductList(productsFilter);
        }
    }
-
-   // useEffect montagem - carrega os produtos da API e joga em productList
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
-   // adição, exclusão, e exclusão geral do carrinho
-   // renderizações condições e o estado para exibir ou não o carrinho
-   // filtro de busca
-   // estilizar tudo com sass de forma responsiva
 
    return (
       <div>
