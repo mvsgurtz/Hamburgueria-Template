@@ -3,10 +3,19 @@ import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
 import style from "./style.module.scss";
 
-export const Header = ({setIsVisible, count}) => {
+export const Header = ({setIsVisible, count, filter, productList}) => {
    const [value, setValue] = useState("");
+   const [showInput, setShowInput] = useState(false);
 
-   console.log(count);
+
+   
+   const showInputHeader = () => {
+      if(window.innerWidth <=425 ){
+         setShowInput(true);
+      }
+      
+   }
+
 
    return (
       <header className={style.header__container}>
@@ -18,15 +27,13 @@ export const Header = ({setIsVisible, count}) => {
                   <span>{count}</span>
                </button>
                <form>
-                  <input
-                     type="text"
-                     value={value}
-                     onChange={(e) => setValue(e.target.value)}
+                  {showInput ? (<input className={style.header__input}
+                     type="text" onMouseOut={() => {setShowInput(false)}}
+                     onChange={(e) => filter(productList, e.target.value)}
                      placeholder="Procurar..."
-                  />
-                  <button type="submit">
-                     <MdSearch size={21} />
-                  </button>
+                  />) : (<button className={style.header__srcBtn} type="submit" onMouseOver={showInputHeader}>
+                  <MdSearch size={21} />
+               </button>)}
                </form>
             </div>
          </div>

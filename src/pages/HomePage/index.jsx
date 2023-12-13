@@ -13,14 +13,13 @@ export const HomePage = () => {
    });
    const [isVisible, setIsVisible] = useState(false);
    const [count, setCount] = useState(2);
-
+   const hamburguerList = async () => {
+      const serverURL = "https://hamburgueria-kenzie-json-serve.herokuapp.com";
+      const api = axios.create({ baseURL: serverURL, timeout: 5 * 1000 });
+      const getApi = await api.get("/products");
+      setProductList(getApi.data);
+   }
    useEffect(() => {
-      const hamburguerList = async () => {
-         const serverURL = "https://hamburgueria-kenzie-json-serve.herokuapp.com";
-         const api = axios.create({ baseURL: serverURL, timeout: 5 * 1000 });
-         const getApi = await api.get("/products");
-         setProductList(getApi.data);
-      }
       hamburguerList();
    }, [])
 
@@ -58,6 +57,16 @@ export const HomePage = () => {
       setCartList([]);
    }
 
+   const filter = (product, e) => {
+      const productsFilter = productList.filter((product) => product.name.toLowerCase().includes(e.toLowerCase()) )
+       if(!e) {
+         hamburguerList();
+       }
+       else {
+         setProductList(productsFilter);
+       }
+   }
+
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
@@ -67,7 +76,7 @@ export const HomePage = () => {
 
    return (
       <div>
-            <Header setIsVisible={setIsVisible} count={count}/>
+            <Header setIsVisible={setIsVisible} count={count} filter={filter} productList={productList}/>
          <main className={style.main__container}>
             <ProductList productList={productList}
                addProductCart={addProductCart} addCount = {addCount} />
